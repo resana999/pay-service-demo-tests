@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: user
+      changes:
+        - createTable:
+            tableName: PRODUCT
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  name: article
+                  type: VARCHAR(100)
+              - column:
+                  name: price
+                  type: BIGINT
+              - column:
+                  name: creation_time
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
+        - createTable:
+            tableName: COUPON
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  name: coupon_code
+                  type: VARCHAR(100)
+              - column:
+                  name: creation_time
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
