@@ -4,6 +4,7 @@ import com.example.demo.domain.Coupon;
 import com.example.demo.domain.Product;
 import com.example.demo.dto.CalculatePriceRequest;
 import com.example.demo.dto.PurchaseRequest;
+import com.example.demo.exception.CouponNotFoundException;
 import com.example.demo.payment_processors.Paypal;
 import com.example.demo.payment_processors.StripePaymentProcessor;
 import com.example.demo.repository.ProductRepository;
@@ -15,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -86,6 +88,13 @@ public class FinalPriceServiceImplTest {
 
         verify(couponService).findCouponByCouponCode(anyString());
         verify(productRepository).findById(anyLong());
+    }
+
+    @Test(expected = CouponNotFoundException.class)
+    public void should_call_calculatePrice_throw_exception() {
+        when(couponService.findCouponByCouponCode(anyString())).thenReturn(Optional.empty());
+        when(productRepository.findById(1L)).thenReturn(mockProductPersist());
+        BigDecimal price = finalPriceService.calculatePrice(mockCalculatePriceRequest());
     }
 
     @Test

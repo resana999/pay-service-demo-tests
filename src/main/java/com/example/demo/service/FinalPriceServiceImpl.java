@@ -5,6 +5,7 @@ import com.example.demo.domain.Coupon;
 import com.example.demo.domain.Product;
 import com.example.demo.dto.CalculatePriceRequest;
 import com.example.demo.dto.PurchaseRequest;
+import com.example.demo.exception.CouponNotFoundException;
 import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.exception.UnknowTaxNumberException;
 import com.example.demo.payment_processors.Paypal;
@@ -29,7 +30,8 @@ public class FinalPriceServiceImpl implements FinalPriceService {
 
     @Override
     public BigDecimal calculatePrice(CalculatePriceRequest calculatePriceRequest) {
-        Coupon coupon = couponService.findCouponByCouponCode(calculatePriceRequest.getCouponCode()).orElse(null);
+        Coupon coupon = couponService.findCouponByCouponCode(calculatePriceRequest.getCouponCode())
+                .orElseThrow(() -> new CouponNotFoundException("Coupon not found: " + calculatePriceRequest.getCouponCode()));
         Product product = productRepository.findById(calculatePriceRequest.getProduct())
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
