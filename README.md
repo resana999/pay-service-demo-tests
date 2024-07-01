@@ -4,5 +4,5 @@
 
 сборка:<br> 
     docker build -t demo .
-запуск сервисов с постгресом:<br>
+<br>запуск сервисов с постгресом:<br>
     docker-compose up -d --build
