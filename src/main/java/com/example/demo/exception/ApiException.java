@@ -15,13 +15,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ApiException extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler({CouponNotFoundException.class, ProductNotFoundException.class,
+            UnknowCouponTypeException.class, UnknowTaxNumberException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "BAD_REQUEST")
     public HttpEntity<Object> setError(
             HttpMediaTypeNotAcceptableException ex,
             HttpHeaders headers, HttpStatus status,
             WebRequest request) {
 
-        return new HttpEntity<>(get(ex.getMessage(),ex, status.value()));
+        return new HttpEntity<>(get(ex.getMessage(), ex, status.value()));
     }
 
     private HttpEntity get(String message, Throwable ex, int status) {

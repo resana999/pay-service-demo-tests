@@ -7,17 +7,13 @@ import com.example.demo.dto.PurchaseRequest;
 import com.example.demo.payment_processors.Paypal;
 import com.example.demo.payment_processors.StripePaymentProcessor;
 import com.example.demo.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.Optional;
